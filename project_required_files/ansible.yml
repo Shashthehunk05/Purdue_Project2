@@ -5,7 +5,7 @@
           community.docker.docker_image:
               build:
                   path: "/home/ubuntu/Desktop"
-              name: docker.io/shashthehunk05/abc-technologies
+              name: docker.io/shashthehunk05/xyz-technologies
               #tag: test
               push: true
               source: build
@@ -14,8 +14,8 @@
               var: out
         - name: start a container
           community.docker.docker_container:
-             name: abc-application
-             image: shashthehunk05/abc-technologies
+             name: xyz-application
+             image: shashthehunk05/xyz-technologies
              state: started
              ports:
                  - 1234:8080
@@ -25,8 +25,8 @@
         - name: Deploy application and service together in kubernetes
           command: >
             kubectl --kubeconfig=/home/ubuntu/kubernetes/admin.conf apply
-            -f /home/ubuntu/Purdue_Project/project_required_files/deployment.yml
-            -f /home/ubuntu/Purdue_Project/project_required_files/service.yml
+            -f /home/ubuntu/Purdue_Project2/project_required_files/deployment.yml
+            -f /home/ubuntu/Purdue_Project2/project_required_files/service.yml
           #delegate_to: localhost
           register: out
         - debug:
