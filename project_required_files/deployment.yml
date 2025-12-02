@@ -1,0 +1,24 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+    name: abctechnologies-dep
+spec:
+    replicas: 2
+    minReadySeconds: 45
+    strategy:
+        type: RollingUpdate
+        rollingUpdate:
+            maxUnavailable: 1
+            maxSurge: 2
+    selector:
+        matchLabels:
+            app: abc-tech-app
+    template:
+        metadata:
+            labels:
+                app: abc-tech-app
+        spec:
+            containers:
+                - image: shashthehunk05/abc-technologies
+                  name: app
+

@@ -1,0 +1,33 @@
+- hosts: web
+  become: yes
+  tasks:
+        - name: Build an image and push it to a private repo
+          community.docker.docker_image:
+              build:
+                  path: "/home/ubuntu/Desktop"
+              name: docker.io/shashthehunk05/abc-technologies
+              #tag: test
+              push: true
+              source: build
+          register: out
+        - debug:
+              var: out
+        - name: start a container
+          community.docker.docker_container:
+             name: abc-application
+             image: shashthehunk05/abc-technologies
+             state: started
+             ports:
+                 - 1234:8080
+          register: out
+        - debug:
+              var: out
+        - name: Deploy application and service together in kubernetes
+          command: >
+            kubectl --kubeconfig=/home/ubuntu/kubernetes/admin.conf apply
+            -f /home/ubuntu/Purdue_Project/project_required_files/deployment.yml
+            -f /home/ubuntu/Purdue_Project/project_required_files/service.yml
+          #delegate_to: localhost
+          register: out
+        - debug:
+              var: out

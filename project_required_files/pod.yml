@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: abc-tech-app-pod
+  labels:
+    app: abc-tech-app
+spec:
+  containers:
+    - name: app
+      image: shashthehunk05/abc-technologies
